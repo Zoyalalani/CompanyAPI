@@ -2,6 +2,7 @@
 using Company.Models;
 using Company.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace Company.Controllers
 {
@@ -44,6 +45,8 @@ namespace Company.Controllers
         [ProducesResponseType(typeof(Employee), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Exception), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Exception), StatusCodes.Status409Conflict)]
+
         public async Task<IActionResult> CreateEmployeeAsync([FromBody] EmployeeRequest employeeRequest)
         {
             if (employeeRequest == null)
@@ -58,10 +61,16 @@ namespace Company.Controllers
                 //Returning the newly created employee
                 return Created($"Employee/{employee.EmployeeId}", employee);
             }
+            catch (SqlException exception)
+            {
+                return StatusCode(StatusCodes.Status409Conflict, exception);
+
+            }
             catch (Exception exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, exception);
             }
+
         }
 
         [HttpPut("{id}")]
