@@ -3,6 +3,7 @@ using Company.Models;
 using Company.Models.Entity;
 using Company.BuisnessLayer;
 using Company.Datalayer.Interfaces;
+using Xunit;
 
 namespace Company.Tests.BusinessLayers
 {
