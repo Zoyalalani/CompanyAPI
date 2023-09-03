@@ -45,6 +45,8 @@ namespace Company.Datalayer.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //In real scenarios, we should use Secrets Manager to insert secrets and not do it this way.
+            //This is for test purposes only.
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Company;Integrated Security=True;");
         }
     }
