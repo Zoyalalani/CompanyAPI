@@ -13,7 +13,8 @@ namespace Company.BuisnessLayer
         {
             _departmentDataLayer = departmentDataLayer;
         }
-
+        //In real scenarios, BL is for inserting business logic
+        //since we don't need any logical statements, this is just a passthrough.
         public Task<Department> CreateDepartment(DepartmentRequest departmentRequest) => _departmentDataLayer.CreateDepartment(departmentRequest);
 
         public Task<List<Department>> GetAllDepartments() => _departmentDataLayer.GetAllDepartments();

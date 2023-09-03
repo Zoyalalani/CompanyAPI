@@ -14,6 +14,8 @@ namespace Company.BuisnessLayer
             _employeeDataLayer = employeeDataLayer;
         }
 
+        //In real scenarios, BL is for inserting business logic
+        //since we don't need any logical statements, this is just a passthrough.
         public Task<Employee> CreateEmployee(EmployeeRequest employeeRequest) => _employeeDataLayer.CreateEmployee(employeeRequest);
 
         public Task DeleteEmployee(int id) => _employeeDataLayer.DeleteEmployee(id);
