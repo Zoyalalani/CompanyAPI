@@ -56,6 +56,16 @@ namespace Company.Datalayer
             return employee;
         }
 
+        public async Task<List<Employee>> GetEmployeesByFirstAndLastName(string firstName, string lastName)
+        {
+            var employees = await _context.Employee
+                .Where(e=>e.FirstName == firstName && e.LastName == lastName)
+                .AsNoTracking()
+                .Include(employee => employee.Department)
+                .ToListAsync();
+            return employees;
+        }
+
         public async Task<List<Employee>> GetAllEmployees()
         {
             var employees = await _context.Employee
@@ -88,6 +98,10 @@ namespace Company.Datalayer
                 Age = employeeRequest.Age,
                 Title = employeeRequest.Title,
                 HireDate = employeeRequest.HireDate,
+                Street = employeeRequest.Street,
+                City = employeeRequest.City,
+                State = employeeRequest.State,
+                Zip = employeeRequest.Zip,
                 Salary = employeeRequest.Salary,
                 WorkLocation = employeeRequest.WorkLocation
             });

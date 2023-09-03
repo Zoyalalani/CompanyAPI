@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Company.Migrations
 {
     /// <inheritdoc />
-    public partial class newmigration : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,9 +74,10 @@ namespace Company.Migrations
                 columns: new[] { "employee_id", "age", "city", "dob", "department_id", "email", "first_name", "date_of_hire", "last_name", "middle_initial", "phone_number", "salary", "state", "street", "title", "work_location", "zip" },
                 values: new object[,]
                 {
-                    { 1, 31, "Pune", null, 1, "Test@EvolentHealth.com", "Test", null, "Employee", "A", null, null, "MH", "Street1", null, null, "411048" },
-                    { 2, 31, "Pune", null, 2, "Test2@EvolentHealth.com", "Test2", null, "Employee2", "B", null, null, "MH", "Street2", null, null, "411048" },
-                    { 3, 31, "Pune", null, 2, "Test3@EvolentHealth.com", "Test3", null, "Employee3", "C", null, null, "MH", "Street3", null, null, "411048" }
+                    { 1, 31, "Pune", null, 1, "Test1@EvolentHealth.com", "Test1", null, "Employee1", "A", null, 5000.00m, "Maharashtra", "Street1", "Senior SE", 0, "411048" },
+                    { 2, 45, "Hyderabad", null, 2, "Test2@EvolentHealth.com", "Test2", null, "Employee2", "B", null, 6000.00m, "Telangana", "Street2", "Associate HR", 2, "500001" },
+                    { 3, 24, "Banglore", null, 2, "Test3@EvolentHealth.com", "Test3", null, "Employee3", "C", null, 8000.00m, "Karnataka", "Street3", "Senior HR", 0, "530068" },
+                    { 4, 55, "Amaravati", null, 1, "Test4@EvolentHealth.com", "Test4", null, "Employee4", "D", null, 10000.00m, "Maharashtra", "Street4", "Architect", 1, "444601" }
                 });
 
             migrationBuilder.CreateIndex(

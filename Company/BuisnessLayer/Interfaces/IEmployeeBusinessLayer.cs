@@ -10,5 +10,6 @@ namespace Company.BuisnessLayer.Interfaces
         Task DeleteEmployee(int id);
         Task<List<Employee>> GetAllEmployees();
         Task<Employee> GetEmployeeById(int id);
+        Task <List<Employee>> GetEmployeesByFirstAndLastName (string firstName, string lastName);
     }
 }

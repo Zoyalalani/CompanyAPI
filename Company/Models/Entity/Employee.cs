@@ -22,11 +22,11 @@ namespace Company.Models.Entity
 
         [Column("middle_initial")]
         [MaxLength(1)]
-        public string? MiddleInitial { get; init; }
+        public string MiddleInitial { get; init; }
 
         [Column("email")]
         [Required]
-        public string? Email { get; init; }
+        public string Email { get; init; }
 
         [Column("dob")]
         public DateTime? DOB { get; init; }
@@ -40,20 +40,20 @@ namespace Company.Models.Entity
         public string Street { get; init; } = string.Empty;
 
         [Column("city")]
-        public string? City { get; init; }
+        public string City { get; init; }
 
         [Column("state")]
-        public string? State { get; init; }
+        public string State { get; init; }
 
         [Column("zip")]
         [MaxLength(6)]
-        public string? Zip { get; init; }
+        public string Zip { get; init; }
 
         [Column("age")]
         public int Age { get; init; }
 
         [Column("title")]
-        public string? Title { get; init; }
+        public string Title { get; init; }
 
         [Column("date_of_hire")]
         public DateTime? HireDate { get; init; }

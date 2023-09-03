@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Company.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    [Migration("20230901205210_new-migration")]
-    partial class newmigration
+    [Migration("20230903211801_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,41 +151,67 @@ namespace Company.Migrations
                             Age = 31,
                             City = "Pune",
                             DepartmentId = 1,
-                            Email = "Test@EvolentHealth.com",
-                            FirstName = "Test",
-                            LastName = "Employee",
+                            Email = "Test1@EvolentHealth.com",
+                            FirstName = "Test1",
+                            LastName = "Employee1",
                             MiddleInitial = "A",
-                            State = "MH",
+                            Salary = 5000.00m,
+                            State = "Maharashtra",
                             Street = "Street1",
+                            Title = "Senior SE",
+                            WorkLocation = 0,
                             Zip = "411048"
                         },
                         new
                         {
                             EmployeeId = 2,
-                            Age = 31,
-                            City = "Pune",
+                            Age = 45,
+                            City = "Hyderabad",
                             DepartmentId = 2,
                             Email = "Test2@EvolentHealth.com",
                             FirstName = "Test2",
                             LastName = "Employee2",
                             MiddleInitial = "B",
-                            State = "MH",
+                            Salary = 6000.00m,
+                            State = "Telangana",
                             Street = "Street2",
-                            Zip = "411048"
+                            Title = "Associate HR",
+                            WorkLocation = 2,
+                            Zip = "500001"
                         },
                         new
                         {
                             EmployeeId = 3,
-                            Age = 31,
-                            City = "Pune",
+                            Age = 24,
+                            City = "Banglore",
                             DepartmentId = 2,
                             Email = "Test3@EvolentHealth.com",
                             FirstName = "Test3",
                             LastName = "Employee3",
                             MiddleInitial = "C",
-                            State = "MH",
+                            Salary = 8000.00m,
+                            State = "Karnataka",
                             Street = "Street3",
-                            Zip = "411048"
+                            Title = "Senior HR",
+                            WorkLocation = 0,
+                            Zip = "530068"
+                        },
+                        new
+                        {
+                            EmployeeId = 4,
+                            Age = 55,
+                            City = "Amaravati",
+                            DepartmentId = 1,
+                            Email = "Test4@EvolentHealth.com",
+                            FirstName = "Test4",
+                            LastName = "Employee4",
+                            MiddleInitial = "D",
+                            Salary = 10000.00m,
+                            State = "Maharashtra",
+                            Street = "Street4",
+                            Title = "Architect",
+                            WorkLocation = 1,
+                            Zip = "444601"
                         });
                 });
 

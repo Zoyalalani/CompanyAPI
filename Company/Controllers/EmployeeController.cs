@@ -1,4 +1,5 @@
-﻿using Company.BuisnessLayer.Interfaces;
+﻿using Company.BuisnessLayer;
+using Company.BuisnessLayer.Interfaces;
 using Company.Models;
 using Company.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,22 @@ namespace Company.Controllers
         public async Task<IActionResult> GetAllEmployeesAsync()
         {
             var result = await _employeeBusinessLayer.GetAllEmployees();
+
+            return Ok(result);
+        }
+
+        //Extra credit : Get list of employees whose first and last name matches
+        [HttpGet]
+        [Route("FirstName/{firstName}/LastName/{lastName}")]
+        [ProducesResponseType(typeof(List<Employee>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetEmployeesByFirstAndLastNameAsync([FromRoute] string firstName, string lastName)
+        {
+            var result =  await _employeeBusinessLayer.GetEmployeesByFirstAndLastName(firstName, lastName);
+
+            if(result.Count == 0)
+            {
+                return NotFound($"No employees with firstName {firstName} and {lastName} found");
+            }
 
             return Ok(result);
         }

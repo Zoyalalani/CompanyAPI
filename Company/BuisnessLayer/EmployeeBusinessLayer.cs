@@ -23,5 +23,8 @@ namespace Company.BuisnessLayer
         public Task<Employee> GetEmployeeById(int id) => _employeeDataLayer.GetEmployeeById(id);
 
         public Task<Employee> UpdateEmployee(int id, EmployeeRequest employeeRequest) => _employeeDataLayer.UpdateEmployee(id, employeeRequest);
+
+        public Task<List<Employee>> GetEmployeesByFirstAndLastName(string firstName, string lastName) =>
+             _employeeDataLayer.GetEmployeesByFirstAndLastName(firstName, lastName);
     }
 }
