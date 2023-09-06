@@ -1,7 +1,8 @@
-﻿using Company.BuisnessLayer.Interfaces;
+﻿using Company.Datalayer.Interfaces;
 using Company.Models;
 using Company.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Company.Controllers
 {
@@ -9,10 +10,10 @@ namespace Company.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IDepartmentBusinessLayer _departmentBusinessLayer;
-        public DepartmentController(IDepartmentBusinessLayer departmentBusinessLayer)
+        private readonly IDepartmentDataLayer _departmentDataLayer;
+        public DepartmentController(IDepartmentDataLayer departmentDataLayer)
         {
-            _departmentBusinessLayer = departmentBusinessLayer;
+            _departmentDataLayer = departmentDataLayer;
         }
 
         [HttpGet("{id}")]
@@ -21,7 +22,7 @@ namespace Company.Controllers
         {
             try
             {
-                var result = await _departmentBusinessLayer.GetDepartmentById(id);
+                var result = await _departmentDataLayer.GetDepartmentById(id);
                 return Ok(result);
             }
             catch (ArgumentException ex)
@@ -35,7 +36,7 @@ namespace Company.Controllers
         [ProducesResponseType(typeof(List<Department>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllDepartmentsAsync()
         {
-            var result = await _departmentBusinessLayer.GetAllDepartments();
+            var result = await _departmentDataLayer.GetAllDepartments();
 
             return Ok(result);
         }
@@ -53,7 +54,7 @@ namespace Company.Controllers
 
             try
             {
-                var department = await _departmentBusinessLayer.CreateDepartment(departmentRequest);
+                var department = await _departmentDataLayer.CreateDepartment(departmentRequest);
 
                 //Returning the newly created department
                 return Created($"Department/{department.DepartmentId}", department);
@@ -82,7 +83,7 @@ namespace Company.Controllers
 
             try
             {
-                var department = await _departmentBusinessLayer.UpdateDepartment(id, departmentRequest);
+                var department = await _departmentDataLayer.UpdateDepartment(id, departmentRequest);
 
                 return Ok(department);
             }

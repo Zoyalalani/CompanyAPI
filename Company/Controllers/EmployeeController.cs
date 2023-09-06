@@ -1,5 +1,4 @@
-﻿using Company.BuisnessLayer;
-using Company.BuisnessLayer.Interfaces;
+﻿using Company.Datalayer.Interfaces;
 using Company.Models;
 using Company.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +10,10 @@ namespace Company.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeBusinessLayer _employeeBusinessLayer;
-        public EmployeeController(IEmployeeBusinessLayer employeeBusinessLayer)
+        private readonly IEmployeeDataLayer _employeeDataLayer;
+        public EmployeeController(IEmployeeDataLayer employeeDataLayer)
         {
-            _employeeBusinessLayer = employeeBusinessLayer;
+            _employeeDataLayer = employeeDataLayer;
         }
 
         [HttpGet("{id}")]
@@ -23,10 +22,10 @@ namespace Company.Controllers
         {
             try
             {
-                var result = await _employeeBusinessLayer.GetEmployeeById(id);
+                var result = await _employeeDataLayer.GetEmployeeById(id);
                 return Ok(result);
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return NotFound(ex.Message);
 
@@ -37,7 +36,7 @@ namespace Company.Controllers
         [ProducesResponseType(typeof(List<Employee>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllEmployeesAsync()
         {
-            var result = await _employeeBusinessLayer.GetAllEmployees();
+            var result = await _employeeDataLayer.GetAllEmployees();
 
             return Ok(result);
         }
@@ -48,9 +47,9 @@ namespace Company.Controllers
         [ProducesResponseType(typeof(List<Employee>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetEmployeesByFirstAndLastNameAsync([FromRoute] string firstName, string lastName)
         {
-            var result =  await _employeeBusinessLayer.GetEmployeesByFirstAndLastName(firstName, lastName);
+            var result = await _employeeDataLayer.GetEmployeesByFirstAndLastName(firstName, lastName);
 
-            if(result.Count == 0)
+            if (result.Count == 0)
             {
                 return NotFound($"No employees with firstName {firstName} and {lastName} found");
             }
@@ -73,7 +72,7 @@ namespace Company.Controllers
 
             try
             {
-                var employee = await _employeeBusinessLayer.CreateEmployee(employeeRequest);
+                var employee = await _employeeDataLayer.CreateEmployee(employeeRequest);
 
                 //Returning the newly created employee
                 return Created($"Employee/{employee.EmployeeId}", employee);
@@ -108,7 +107,7 @@ namespace Company.Controllers
 
             try
             {
-                var employee = await _employeeBusinessLayer.UpdateEmployee(id, employeeRequest);
+                var employee = await _employeeDataLayer.UpdateEmployee(id, employeeRequest);
 
                 return Ok(employee);
             }
@@ -130,7 +129,7 @@ namespace Company.Controllers
         {
             try
             {
-                await _employeeBusinessLayer.DeleteEmployee(id);
+                await _employeeDataLayer.DeleteEmployee(id);
                 return NoContent();
             }
             catch (ArgumentException ex)

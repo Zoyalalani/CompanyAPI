@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="BusinessLayer\**" />
-    <EmbeddedResource Remove="BusinessLayer\**" />
-    <None Remove="BusinessLayer\**" />
+    <Compile Remove="DataLayer\**" />
+    <EmbeddedResource Remove="DataLayer\**" />
+    <None Remove="DataLayer\**" />
   </ItemGroup>
 
   <ItemGroup>

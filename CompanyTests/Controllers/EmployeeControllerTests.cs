@@ -18,14 +18,14 @@ namespace Company.Tests.Controllers
     public class EmployeeControllerTests
     {
         private EmployeeController _employeeController;
-        private readonly Mock<IEmployeeBusinessLayer> _mockEmployeeBusinessLayer;
+        private readonly Mock<IEmployeeDataLayer> _mockEmployeeDataLayer;
         private readonly EmployeeRequest _employeeRequest;
         private readonly Employee _employee;
 
         public EmployeeControllerTests()
         {
-            _mockEmployeeBusinessLayer = new Mock<IEmployeeBusinessLayer>();
-            _employeeController = new EmployeeController(_mockEmployeeBusinessLayer.Object)
+            _mockEmployeeDataLayer = new Mock<IEmployeeDataLayer>();
+            _employeeController = new EmployeeController(_mockEmployeeDataLayer.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -55,7 +55,7 @@ namespace Company.Tests.Controllers
         public async Task CreateEmployee_Success()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.CreateEmployee(It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.CreateEmployee(It.IsAny<EmployeeRequest>()))
                 .ReturnsAsync(_employee);
 
             // Act
@@ -70,7 +70,7 @@ namespace Company.Tests.Controllers
         public async Task CreateEmployee_BadRequest_Null()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.CreateEmployee(It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.CreateEmployee(It.IsAny<EmployeeRequest>()))
                 .ReturnsAsync(_employee);
 
             // Act
@@ -84,7 +84,7 @@ namespace Company.Tests.Controllers
         public async Task CreateEmployee_Exception()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.CreateEmployee(It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.CreateEmployee(It.IsAny<EmployeeRequest>()))
                 .ThrowsAsync(new Exception());
 
             // Act
@@ -98,7 +98,7 @@ namespace Company.Tests.Controllers
         public async Task GetEmployeeById_Success()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.GetEmployeeById(It.IsAny<int>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.GetEmployeeById(It.IsAny<int>()))
                 .ReturnsAsync(_employee);
 
             // Act
@@ -113,7 +113,7 @@ namespace Company.Tests.Controllers
         public void GetAllEmployee_Success()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.GetAllEmployees());
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.GetAllEmployees());
 
             // Act
             var result = _employeeController.GetAllEmployeesAsync();
@@ -126,7 +126,7 @@ namespace Company.Tests.Controllers
         public async Task UpdateEmployee_Success()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
                 .ReturnsAsync(_employee);
 
             // Act
@@ -141,7 +141,7 @@ namespace Company.Tests.Controllers
         public async Task UpdateEmployee_BadRequest_Null_Request()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
                 .ReturnsAsync(_employee);
 
             // Act
@@ -155,7 +155,7 @@ namespace Company.Tests.Controllers
         public async Task UpdateEmployee_BadRequest_Null_Id()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
                 .ReturnsAsync(_employee);
 
             // Act
@@ -169,7 +169,7 @@ namespace Company.Tests.Controllers
         public async Task UpdateEmployee_NotFound()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.UpdateEmployee(It.IsAny<int>(), It.IsAny<EmployeeRequest>()))
                 .ThrowsAsync(new ArgumentException());
 
             // Act
@@ -183,7 +183,7 @@ namespace Company.Tests.Controllers
         public async Task DeleteEmployee_Success()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.DeleteEmployee(It.IsAny<int>()));
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.DeleteEmployee(It.IsAny<int>()));
 
             // Act
             var result = await _employeeController.DeleteEmployee(1);
@@ -196,7 +196,7 @@ namespace Company.Tests.Controllers
         public async Task DeleteEmployee_NotFound()
         {
             // Arrange
-            _mockEmployeeBusinessLayer.Setup(businessLayer => businessLayer.DeleteEmployee(It.IsAny<int>())).ThrowsAsync(new ArgumentException()); ;
+            _mockEmployeeDataLayer.Setup(businessLayer => businessLayer.DeleteEmployee(It.IsAny<int>())).ThrowsAsync(new ArgumentException()); ;
 
             // Act
             var result = await _employeeController.DeleteEmployee(1);
